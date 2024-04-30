@@ -172,13 +172,13 @@ internal static partial class CodeGenerator
                     return new Godot.Collections.Array<T>(godotObjects.Select(Bind<T>));
                 }
                 
-                protect readonly struct MethodInfo
+                private readonly struct MethodInfo
                 {
                     public string NativeName { get; }
                     public Variant[] DefaultArguments { get; }
                     public int ArgumentCount { get; }
                     public int DefaultArgumentIndex  { get; }
-                    public MethodInfo(Dictionary dictionary)
+                    public MethodInfo(Godot.Collections.Dictionary dictionary)
                     {
                         using var nameInfo = dictionary["name"];
                         using var argsInfo = dictionary["args"];
@@ -228,7 +228,7 @@ internal static partial class CodeGenerator
                        {
                            var methodInfo = new MethodInfo(dictionary);
                            dictionary.Dispose();
-                           return new KeyValuePair<string, MethodInfo>(methodInfo.NativeName,methodInfo);
+                           return new System.Collections.Generic.KeyValuePair<string, MethodInfo>(methodInfo.NativeName,methodInfo);
                        }));
                 }
                 
